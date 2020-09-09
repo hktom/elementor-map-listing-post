@@ -26,7 +26,7 @@ class Map_listing_post extends Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => __( 'Map Parameters', self::$slug ),
+				'label' => __( 'Map Style', self::$slug ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -57,7 +57,37 @@ class Map_listing_post extends Widget_Base {
 				'label' => __( 'Geo Json Url', 'self::$slug' ),
 				'type' => \Elementor\Controls_Manager::TEXT,
 				'input_type' => 'url',
-				'placeholder' => __( 'https://docs.mapbox.com/mapbox-gl-js/assets/us_states.geojson', 'self::$slug' ),
+				'placeholder' => __( 'geo json file url', 'self::$slug' ),
+			]
+		);
+		
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'content_section',
+			[
+				'label' => __( 'Map Parameters', self::$slug ),
+				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'map_url_style',
+			[
+				'label' => __( 'Map Url Style', 'self::$slug' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'input_type' => 'url',
+				'placeholder' => __( 'mapbox url style', 'self::$slug' ),
+			]
+		);
+
+		$this->add_control(
+			'access_token',
+			[
+				'label' => __( 'Token Access', 'self::$slug' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'input_type' => 'text',
+				'placeholder' => __( 'mapbox token access', 'self::$slug' ),
 			]
 		);
 
@@ -70,6 +100,8 @@ class Map_listing_post extends Widget_Base {
 			'fill-color'=> $settings['fill_color'],
 			'border-color'=> $settings['border_color'],
 			'geo_json'=>$settings['geo_json'],
+			'map_url_style'=>$settings['map_url_style'],
+			'access_token'=>$settings['access_token'],
 		];
         // render map
         show_post_listing();
