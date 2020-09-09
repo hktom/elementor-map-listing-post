@@ -6,8 +6,8 @@ use Elementor\Widget_Base;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-include plugin_dir_path( __FILE__ ) . 'mapboxGL.php';
-include plugin_dir_path( __FILE__ ) . 'listPost.php';
+include plugin_dir_path( __FILE__ ) . 'map_box_gl.php';
+include plugin_dir_path( __FILE__ ) . 'post_listing.php';
 
 class Map_listing_post extends Widget_Base {
 
@@ -17,7 +17,7 @@ class Map_listing_post extends Widget_Base {
 
 	public function get_title() { return __('Elementor Map Listing Post', self::$slug); }
 
-	public function get_icon() { return 'fa fa-caret-down'; }
+	public function get_icon() { return 'fab fa-accusoft'; }
 
 	public function get_categories() { return [ 'general' ]; }
 
@@ -26,7 +26,7 @@ class Map_listing_post extends Widget_Base {
 		$this->start_controls_section(
 			'content_section',
 			[
-				'label' => __( 'Content', self::$slug ),
+				'label' => __( 'Map Parameters', self::$slug ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
 			]
 		);
@@ -35,7 +35,7 @@ class Map_listing_post extends Widget_Base {
 			'fill_color',
 			[
 				'label' => __( 'Color on hover', 'self::$slug' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
+				'type' => \Elementor\Controls_Manager::COLOR,
 				'input_type' => 'color',
 				'placeholder' => __( '#ffff', 'self::$slug' ),
 			]
@@ -45,7 +45,7 @@ class Map_listing_post extends Widget_Base {
 			'border_color',
 			[
 				'label' => __( 'Country Border Color', 'self::$slug' ),
-				'type' => \Elementor\Controls_Manager::TEXT,
+				'type' => \Elementor\Controls_Manager::COLOR,
 				'input_type' => 'color',
 				'placeholder' => __( '#ffff', 'self::$slug' ),
 			]
@@ -65,8 +65,14 @@ class Map_listing_post extends Widget_Base {
 	}
 
 	protected function render() {
+		$settings = $this->get_settings_for_display();
+		$map_params=[
+			'fill-color'=> $settings['fill_color'],
+			'border-color'=> $settings['border_color'],
+			'geo_json'=>$settings['geo_json'],
+		];
         // render map
-        listPost();
-        mapBox();
+        show_post_listing();
+        show_map($map_params);
 	}
 }

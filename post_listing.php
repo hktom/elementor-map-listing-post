@@ -1,6 +1,6 @@
 <?php
 // List Post Query
-function listPost(){
+function show_post_listing(){
     // The Query
 $the_query = new WP_Query( array( 'post_type' => 'createur' ) );
  

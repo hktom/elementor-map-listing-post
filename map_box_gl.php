@@ -1,5 +1,11 @@
 <?php
-function mapBox(){
+function show_map($arr){
+    echo "
+    <input type='hidden' name='border_color' value=".$arr['border-color']." id='border_color'/>
+    <input type='hidden' name='fill_color' value=".$arr['fill-color']." id='fill-color'/>
+    <input type='hidden' name='geo_json' value=".$arr['geo_json']." 
+    id='geo_json'/>
+    ";
     ?>
 
 <style>
@@ -7,7 +13,7 @@ function mapBox(){
 max-width: 400px !important;
 }
 </style>
-        
+       
 <div id='map' style='width: 100%; height: 450px;'></div>
 <script>
 $(function(){
@@ -18,10 +24,11 @@ $(function(){
     map.on('load', function() {
         map.addSource('states', {
             'type': 'geojson',
-            'data': 'https://raw.githubusercontent.com/hktom/assets/master/africa-countries.geo.json'
+            'data': $(`#geo_json`).val()
         });
 
         // The feature-state dependent fill-opacity expression will render the hover effect
+        //https://raw.githubusercontent.com/hktom/assets/master/africa-countries.geo.json
         // when a feature's hover state is set to true.
         map.addLayer({
             'id': 'state-fills',
@@ -29,7 +36,7 @@ $(function(){
             'source': 'states',
             'layout': {},
             'paint': {
-                'fill-color': '#DEAB53',
+                'fill-color': $(`#fill-color`).val(),
                 'fill-opacity': [
                     'case', ['boolean', ['feature-state', 'hover'], false],
                     1,
@@ -44,7 +51,7 @@ $(function(){
             'source': 'states',
             'layout': {},
             'paint': {
-                'line-color': '#DEAB53',
+                'line-color': $(`#border_color`).val(),
                 'line-width': 0.5
             }
         });
