@@ -64,10 +64,46 @@ class Map_listing_post extends Widget_Base {
 		$this->end_controls_section();
 
 		$this->start_controls_section(
-			'content_section',
+			'section_parameters',
 			[
 				'label' => __( 'Map Parameters', self::$slug ),
 				'tab' => \Elementor\Controls_Manager::TAB_CONTENT,
+			]
+		);
+
+		$this->add_control(
+			'position_lng',
+			[
+				'label' => __( 'Position Longitude', 'self::$slug' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'input_type' => 'text',
+				'placeholder' => __( "lng", 'self::$slug' ),
+				'default' => "21.634121",
+			]
+		);
+		
+		$this->add_control(
+			'position_lat',
+			[
+				'label' => __( 'Position Latitude', 'self::$slug' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'input_type' => 'text',
+				'placeholder' => __( "lat", 'self::$slug' ),
+				'default' => "-2.380922",
+			]
+		);
+
+
+		$this->add_control(
+			'zoom',
+			[
+				'label' => __( 'Map Zoom', 'self::$slug' ),
+				'type' => \Elementor\Controls_Manager::NUMBER,
+				'input_type' => 'text',
+				'placeholder' => __( "starting zoom ex:1", 'self::$slug' ),
+				'min' => 0,
+				'max' => 10,
+				'default' => 2,
 			]
 		);
 
@@ -102,6 +138,9 @@ class Map_listing_post extends Widget_Base {
 			'geo_json'=>$settings['geo_json'],
 			'map_url_style'=>$settings['map_url_style'],
 			'access_token'=>$settings['access_token'],
+			'position_lng'=>$settings['position_lng'],
+			'position_lat'=>$settings['position_lat'],
+			'zoom'=>$settings['zoom'],
 		];
         // render map
         show_post_listing();

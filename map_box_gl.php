@@ -1,10 +1,14 @@
 <?php
 function show_map($arr){
     echo "
-    <input type='hidden' name='border_color' value=".$arr['border-color']." id='border_color'/>
-    <input type='hidden' name='fill_color' value=".$arr['fill-color']." id='fill-color'/>
-    <input type='hidden' name='geo_json' value=".$arr['geo_json']." 
-    id='geo_json'/>
+    <input type='hidden' value=".$arr['border-color']." id='border_color'/>
+    <input type='hidden' value=".$arr['fill-color']." id='fill-color'/>
+    <input type='hidden' value=".$arr['geo_json']." id='geo_json'/>
+    <input type='hidden' value=".$arr['map_url_style']." id='map_url_style'/>
+    <input type='hidden' value=".$arr['access_token']." id='access_token'/>
+    <input type='hidden' value=".$arr['zoom']." id='zoom'/>
+    <input type='hidden' value=".$arr['position_lng']." id='position_lng'/>
+    <input type='hidden' value=".$arr['position_lat']." id='position_lat'/>
     ";
     ?>
 
@@ -141,15 +145,16 @@ function geocoder(){
 
     var posts=[];
     var locations=[];
-    mapboxgl.accessToken = 'pk.eyJ1IjoidG9taGsiLCJhIjoiY2szZ3R2eG1rMDU2azNobXR5dXUzODRieiJ9.3AcxoJrp5yJtZTxPdqmDzw';
+    mapboxgl.accessToken = $(`#access_token`).val();
 var mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
-
+var lng=parseFloat($(`#position_lng`).val());
+var lat=parseFloat($(`#position_lat`).val());
 var map = new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/tomhk/ckea7kbu400u619qvq715xfkm',
+    style: $(`#map_url_style`).val(),
      // stylesheet location
-    center: [21.634121, -2.380922], // starting position [lng, lat]
-    zoom: 2 // starting zoom
+    center: [lng, lat], // starting position [lng, lat]
+    zoom: parseInt($(`#zoom`).val()) // starting zoom
 });
 
 map.addControl(new mapboxgl.NavigationControl());
