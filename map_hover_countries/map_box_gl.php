@@ -1,5 +1,5 @@
 <?php
-function show_map($arr){
+function map_box_gl($arr){
     echo "
     <input type='hidden' value=".$arr['border-color']." id='border_color'/>
     <input type='hidden' value=".$arr['fill-color']." id='fill-color'/>
@@ -18,7 +18,8 @@ max-width: 400px !important;
 }
 </style>
        
-<div id='map' style='width: 100%; height: 450px;'></div>
+<div id='map' style='width: 100%; height: <?php echo $arr['height']."px";?>'>
+</div>
 <script>
 $(function(){
 
