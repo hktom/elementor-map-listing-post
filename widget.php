@@ -6,8 +6,9 @@ use Elementor\Widget_Base;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
-include plugin_dir_path( __FILE__ ) . '/map_hover_countries/map_box_gl.php';
 include plugin_dir_path( __FILE__ ) . '/post_listing/post_listing.php';
+include plugin_dir_path( __FILE__ ) . '/post_listing/map_post_listing.php';
+include plugin_dir_path( __FILE__ ) . '/map_hover_countries/map_box_gl.php';
 include plugin_dir_path( __FILE__ ) . '/simple_map/simple_map.php';
 
 class Map_listing_post extends Widget_Base {
@@ -54,11 +55,11 @@ class Map_listing_post extends Widget_Base {
 				'type' => \Elementor\Controls_Manager::SELECT,
 				//'input_type' => 'text',
 				//'placeholder' => __( "height in px", 'self::$slug' ),
-				'default' => 'simple_map',
+				'default' => 'Choose action to apply',
 				'options'=>[
-					'simple_map'  => __( 'Simple Map', 'self::$slug' ),
 					'post_listing'  => __( 'Post Listing', 'self::$slug' ),
 					'map_hover_countries'  => __( 'Map Hover Countries', 'self::$slug' ),
+					'simple_map'  => __( 'Simple Map', 'self::$slug' ),
 				]
 			]
 		);
@@ -87,16 +88,16 @@ class Map_listing_post extends Widget_Base {
 			]
 		);
 
-		// $this->add_control(
-		// 	'acf',
-		// 	[
-		// 		'label' => __( 'Location Field', 'self::$slug' ),
-		// 		'type' => \Elementor\Controls_Manager::TEXT,
-		// 		'input_type' => 'text',
-		// 		'placeholder' => __( "country", 'self::$slug' ),
-		// 		'default' => '',
-		// 	]
-		// );
+		$this->add_control(
+			'acf',
+			[
+				'label' => __( 'Location Field', 'self::$slug' ),
+				'type' => \Elementor\Controls_Manager::TEXT,
+				'input_type' => 'text',
+				'placeholder' => __( "country", 'self::$slug' ),
+				'default' => '',
+			]
+		);
 
 		$this->end_controls_section();
 
@@ -248,23 +249,22 @@ class Map_listing_post extends Widget_Base {
 			'height'=>$settings['height'],
 			'map_options'=>$settings['map_options'],
 			'cpt'=>$settings['cpt'],
-			//'acf'=>$settings['acf'],
+			'acf'=>$settings['acf'],
 		];
 
 		if($settings['map_options']=="simple_map"){
 			simple_map($params);
 		}
 		else if($settings['map_options']=="post_listing"){
-			echo "<h1> post listing</h2>";
 			post_listing($params);
-			//map_post_listing($params);
+			map_post_listing($params);
 		}
 		else if($settings['map_options']=="map_hover_countries"){
 			map_box_gl($params);
 		}
 		else
-		{
-
+		{ 
+			echo "Elementor Map Listing Post";
 		}
 	}
 }
