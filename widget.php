@@ -11,7 +11,7 @@ include plugin_dir_path( __FILE__ ) . '/post_listing/map_post_listing.php';
 include plugin_dir_path( __FILE__ ) . '/map_hover_countries/map_box_gl.php';
 include plugin_dir_path( __FILE__ ) . '/simple_map/simple_map.php';
 
-class Map_listing_post extends Widget_Base {
+class Elementor_map_listing_post extends Widget_Base {
 
 	public static $slug = 'elementor_map_listing_post';
 
@@ -237,30 +237,16 @@ class Map_listing_post extends Widget_Base {
 
 	protected function render() {
 		$settings = $this->get_settings_for_display();
-		$params=[
-			'fill-color'=> $settings['fill_color'],
-			'border-color'=> $settings['border_color'],
-			'geo_json'=>$settings['geo_json'],
-			'map_url_style'=>$settings['map_url_style'],
-			'access_token'=>$settings['access_token'],
-			'position_lng'=>$settings['position_lng'],
-			'position_lat'=>$settings['position_lat'],
-			'zoom'=>$settings['zoom'],
-			'height'=>$settings['height'],
-			'map_options'=>$settings['map_options'],
-			'cpt'=>$settings['cpt'],
-			'acf'=>$settings['acf'],
-		];
 
 		if($settings['map_options']=="simple_map"){
-			simple_map($params);
+			simple_map($settings);
 		}
 		else if($settings['map_options']=="post_listing"){
-			post_listing($params);
-			map_post_listing($params);
+			post_listing($settings);
+			map_post_listing($settings);
 		}
 		else if($settings['map_options']=="map_hover_countries"){
-			map_box_gl($params);
+			map_box_gl($settings);
 		}
 		else
 		{ 

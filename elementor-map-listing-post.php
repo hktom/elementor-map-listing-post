@@ -10,6 +10,7 @@
  */
 namespace Elementor_Map_Listing_Post;
 use Elementor\Plugin;
+include(dirname(__FILE__)."/assets.php");
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
@@ -18,8 +19,9 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 add_action( 'elementor/widgets/widgets_registered', function() {
 	require_once('widget.php');
 
-	$map_listing_post =	new Map_listing_post();
+	$elementor_map_listing_post =	new Elementor_map_listing_post();
 
 	// Let Elementor know about our widget
-	Plugin::instance()->widgets_manager->register_widget_type( $map_listing_post );
+	Plugin::instance()->widgets_manager->register_widget_type( $elementor_map_listing_post );
 });
+
