@@ -2,6 +2,17 @@
 
 // count term use
 function count_term_use ($post_type){
+
+    global $wp;
+    $url=home_url( $wp->request );
+    
+    ?>
+
+    <div id="menu-tags">
+    <div class="text-left pl-4"> <h3>Solutions par categories</h3></div>
+    <div class="menu">
+    <a class="dropdown-item" href="<?php echo $url;?>">Tous </a>
+    <?php 
     $taxonomies = get_object_taxonomies( $post_type, 'objects');
     $exclude = array( 'country', 'category');
     if ( $taxonomies ) {
@@ -32,5 +43,10 @@ function count_term_use ($post_type){
         }
     
     }
+    ?>
+    </div>
+    </div>
+
+    <?php
     
     }
