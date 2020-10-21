@@ -29,103 +29,67 @@ cursor: pointer;
 
 </style>
        
-<div id='map' style='width: 100%; height: <?php echo $arr['height']."px";?>'>
+
+<div class="row">
+ <div class="col-lg-9 col-12">
+    
+ <form class="my-1" method="get" action="<?php global $wp; echo home_url( $wp->request );?>">
+  <div class="form-group mb-0">
+    <!-- <label for="exampleInputEmail1">Email address</label> -->
+    <input type="search" class="form-control" name="q" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Rechercher une solution">
+  </div>
+</form>
+
+    <div id='map' style='width: 100%; height: <?php echo $arr['height']."px";?>'>
+    </div>
+ </div>
+ <div class="col-lg-3 col-12" id="mini-fiche">
+   <div class="text-left pl-4"> <h3>Solutions par categories</h3></div>
+   <div class="menu">
+   <a class="dropdown-item" href="<?php  global $wp;echo home_url( $wp->request );?>">Tous </a>
+   <?php count_term_use ($arr['cpt']);?>
+  </div>
+ </div>
 </div>
-<script>
-$(function(){
-
-//Set Locations from posts
-function getPosts(posts){
-    var i=0;
-    var totalPost=parseInt($(`#total_posts`).val());
-    if(totalPost > 0){
-        while(i < totalPost ){
-            posts.push($(`#post_${i}`).attr('location'));
-           i++;
-       }
-    }    
-}
-
-function getTerms(terms){
-    var i=0;
-    var totalTerms=parseInt($(`#total_terms`).val());
-    if(totalTerms > 0){
-        while(i < totalTerms ){
-            terms.push($(`#terms_${i}`).attr('term'));
-           i++;
-       }
-    }    
-}
-
-
-//markers 
-function setMarker(countryName, totalPost){
-    mapboxClient.geocoding
-    .forwardGeocode({
-    query: countryName,
-    autocomplete: false,
-    limit: 1
-    }).send().then(function(res){
-        if(res && res.body && res.body.features && res.body.features.length){
-            var feature = res.body.features[0];
-            
-            // create DOM element for the marker
-            var el = document.createElement('div');
-            el.innerHTML =`${totalPost}`;
-            el.id = 'marker';
-
-            new mapboxgl.Marker(el).
-            setLngLat(feature.center).
-            addTo(map);
-        }
-    })
-}
-
-//geocoder
-function geocoder(posts){
-    var locations={};
-
-    posts.forEach(post => {
-            terms.forEach(item => {
-                if(item==post){
-                    locations[post]?locations[post]++:locations[post]=1;
-                }
-            });
-    });
-
-    for (var key in locations) {
-        //key => country name
-        //locations[key] => total 
-        setMarker(key, locations[key]);
-    }
-   
-
-}
-
-//shapefile african countries
-
-    var posts=[]; //post lists
-    var terms=[]; //terms countries
-    mapboxgl.accessToken = $(`#access_token`).val();
-    var mapboxClient = mapboxSdk({ accessToken: mapboxgl.accessToken });
-    var lng=parseFloat($(`#position_lng`).val());
-    var lat=parseFloat($(`#position_lat`).val());
-    var map = new mapboxgl.Map({
-        container: 'map',
-        style: $(`#map_url_style`).val(),// stylesheet location
-        center: [lng, lat], // starting position [lng, lat]
-        zoom: parseInt($(`#zoom`).val()) // starting zoom
-    });
-
-    map.addControl(new mapboxgl.NavigationControl());
-    getTerms(terms);
-    getPosts(posts);
-    geocoder(posts);
 
 
 
-});
-</script>
+<script type="text/javascript" src="<?php echo plugin_dir_url( __DIR__ ).'/post_listing/map_post_listing.js';?>"></script>
+
 <?php
-//mapBox function
+//mapBox function Js
+}
+
+function count_term_use ($post_type){
+$taxonomies = get_object_taxonomies( $post_type, 'objects');
+$exclude = array( 'country', 'category');
+if ( $taxonomies ) {
+
+    foreach ( $taxonomies  as $taxonomy ) {
+
+        if( in_array( $taxonomy->name, $exclude ) ) {
+            continue;
+        }
+
+        $terms = get_terms( array(
+            'taxonomy' => $taxonomy->name,
+            'hide_empty' => true,
+        ) );
+
+        if ( ! empty( $terms ) && ! is_wp_error( $terms ) ) {
+
+            foreach ( $terms as $term ) {
+                global $wp; 
+                $url=home_url( $wp->request ).'?v='.$term->name.'&q=tag&tags='.$taxonomy->name;       
+                ?>
+                <a class="dropdown-item" href="<?php echo $url;?>"><?php echo $term->name;?> <span class="badge badge-light"><?php echo $term->count;?> </span></a>
+                <?php
+            }
+
+        }
+
+    }
+
+}
+
 }
