@@ -34,7 +34,7 @@ $(function() {
     }
 
     //markers
-    function setMarker(countryName, totalPost) {
+    function setMarker(countryName, totalPost, acf) {
         mapboxClient.geocoding
             .forwardGeocode({
                 query: countryName,
@@ -49,6 +49,12 @@ $(function() {
                     var el = document.createElement("div");
                     el.innerHTML = `${totalPost}`;
                     el.id = "marker";
+                    el.addEventListener('click', () => {
+                        //alert("Marker Clicked. v2");
+                        var url = $("#page-url").val();
+                        url += `/?q=${acf}&v=${countryName}`;
+                        window.location.href = url;
+                    });
                     var marker = new mapboxgl.Marker(el).setLngLat(feature.center);
                     marker.remove(map);
                     marker.addTo(map);
@@ -71,7 +77,8 @@ $(function() {
         for (var key in locations) {
             //key => country name
             //locations[key] => total
-            setMarker(key, locations[key]);
+            var acf = $("#acf").val();
+            setMarker(key, locations[key], acf);
         }
     }
 

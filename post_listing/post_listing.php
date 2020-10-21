@@ -4,7 +4,7 @@ function post_listing($arr){
     // The Query
 $args = array( 'post_type' => $arr['cpt'], 'posts_per_page' => -1);
 
-    if(isset($_GET['q'])){
+    if(isset($_GET['q']) && $_GET['q']!=$arr['acf']){
         if($_GET['q']=='tag' && isset($_GET['tags']) && isset($_GET['v'] )){
             $args['tax_query']=array(
                 array('taxonomy' => urldecode($_GET['tags']),
