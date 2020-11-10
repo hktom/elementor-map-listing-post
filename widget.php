@@ -7,7 +7,7 @@ use Elementor\Widget_Base;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 include plugin_dir_path( __FILE__ ) . '/post_listing/post_listing.php';
-include plugin_dir_path( __FILE__ ) . '/post_listing/map_post_listing.php';
+include plugin_dir_path( __FILE__ ) . '/post_listing/vue_post_listing.php';
 include plugin_dir_path( __FILE__ ) . '/map_hover_countries/map_box_gl.php';
 include plugin_dir_path( __FILE__ ) . '/simple_map/simple_map.php';
 
@@ -243,7 +243,7 @@ class Elementor_map_listing_post extends Widget_Base {
 		}
 		else if($settings['map_options']=="post_listing"){
 			post_listing($settings);
-			map_post_listing($settings);
+			vue_map_post_listing($settings);
 		}
 		else if($settings['map_options']=="map_hover_countries"){
 			map_box_gl($settings);
