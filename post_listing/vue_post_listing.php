@@ -19,10 +19,10 @@
           margin-top: 0px !important;
         }
       </style>
-      <link href="<?= plugin_dir_url( __DIR__ ).'/post_listing/css/app.053c1023.css';?>" rel="preload" as="style">
-      <link href="<?= plugin_dir_url( __DIR__ ).'/post_listing/js/app.a491bb25.js';?>" rel="preload" as="script">
-      <link href="<?= plugin_dir_url( __DIR__ ).'/post_listing/js/chunk-vendors.8eec77c1.js';?>" rel="preload" as="script">
-      <link href="<?= plugin_dir_url( __DIR__ ).'/post_listing/css/app.053c1023.css';?>" rel="stylesheet">
+      <link href="<?= plugin_dir_url( __DIR__ ).'/post_listing/css/app.80a67389.css';?>" rel="preload" as="style">
+      <link href="<?= plugin_dir_url( __DIR__ ).'/post_listing/js/app.d620e559.js';?>" rel="preload" as="script">
+      <link href="<?= plugin_dir_url( __DIR__ ).'/post_listing/js/chunk-vendors.8d2e8006.js';?>" rel="preload" as="script">
+      <link href="<?= plugin_dir_url( __DIR__ ).'/post_listing/css/app.80a67389.css';?>" rel="stylesheet">
     </head>
     
     <body>
@@ -47,8 +47,8 @@
         window.border_color = "<?= $arr['border-color'] ?>" // default: 'transparent'
         window.fill_color = "<?= $arr['fill-color'] ?>" // default: 'red' 
       </script>
-      <script src="<?= plugin_dir_url( __DIR__ ).'/post_listing/js/chunk-vendors.8eec77c1.js';?>"></script>
-      <script src="<?= plugin_dir_url( __DIR__ ).'/post_listing/js/app.a491bb25.js';?>"></script>
+      <script src="<?= plugin_dir_url( __DIR__ ).'/post_listing/js/chunk-vendors.8d2e8006.js';?>"></script>
+      <script src="<?= plugin_dir_url( __DIR__ ).'/post_listing/js/app.d620e559.js';?>"></script>
   </body>
   </html>
 
