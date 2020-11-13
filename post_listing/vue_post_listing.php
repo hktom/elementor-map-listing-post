@@ -19,10 +19,10 @@
           margin-top: 0px !important;
         }
       </style>
-      <link href="<?= plugin_dir_url( __DIR__ ).'/post_listing/css/app.80a67389.css';?>" rel="preload" as="style">
-      <link href="<?= plugin_dir_url( __DIR__ ).'/post_listing/js/app.d620e559.js';?>" rel="preload" as="script">
+      <link href="<?= plugin_dir_url( __DIR__ ).'/post_listing/css/app.7a46e231.css';?>" rel="preload" as="style">
+      <link href="<?= plugin_dir_url( __DIR__ ).'/post_listing/js/app.39e8f8dc.js';?>" rel="preload" as="script">
       <link href="<?= plugin_dir_url( __DIR__ ).'/post_listing/js/chunk-vendors.8d2e8006.js';?>" rel="preload" as="script">
-      <link href="<?= plugin_dir_url( __DIR__ ).'/post_listing/css/app.80a67389.css';?>" rel="stylesheet">
+      <link href="<?= plugin_dir_url( __DIR__ ).'/post_listing/css/app.7a46e231.css';?>" rel="stylesheet">
     </head>
     
     <body>
@@ -48,7 +48,7 @@
         window.fill_color = "<?= $arr['fill-color'] ?>" // default: 'red' 
       </script>
       <script src="<?= plugin_dir_url( __DIR__ ).'/post_listing/js/chunk-vendors.8d2e8006.js';?>"></script>
-      <script src="<?= plugin_dir_url( __DIR__ ).'/post_listing/js/app.d620e559.js';?>"></script>
+      <script src="<?= plugin_dir_url( __DIR__ ).'/post_listing/js/app.39e8f8dc.js';?>"></script>
   </body>
   </html>
 
